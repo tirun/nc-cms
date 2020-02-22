@@ -8,28 +8,32 @@
 		<meta name="robots" content="nofollow" />
 		<link rel="stylesheet" type="text/css" media="screen" href="system/css/editor.css"/>
 		<link rel="stylesheet" type="text/css" media="screen" href="system/css/editor_html.css"/>
-		<script type="text/javascript" src="system/js/tiny_mce/tiny_mce.js"></script>
+		<script type="text/javascript" src="system/js/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript">	
-			tinyMCE.init({
-				mode : "textareas",
-				theme : "advanced",
-				skin : "default",
-				relative_urls : 0,
+			// see https://www.tiny.cloud/docs/demo/full-featured/ for explanation of options
+			tinymce.init({
+				selector: '#editordata',
+				branding: false,
+				images_upload_url: 'index.php?action=file_manager_upload&return',
+				content_css : '<?php echo NC_EDIT_CONTENT_CSS; ?>',
+				// importcss_append: true,
+				height: 500,
+
+				plugins: 'print preview paste importcss searchreplace autolink save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+				menubar: 'file edit view insert format tools table help',
+				toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+				toolbar_sticky: true,
 				
-				plugins : "lists,media,noneditable,nonbreaking,tabfocus,wordcount,table,advimage,advlink,inlinepopups,insertdatetime,media,searchreplace,paste,directionality,fullscreen,xhtmlxtras,pagebreak",
-
-				theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,indent,outdent,sub,sup,formatselect,fontselect,fontsizeselect,forecolor,backcolor,selectall,removeformat,|,code,cleanup,fullscreen",
-				theme_advanced_buttons2 : "undo,redo,paste,pastetext,pasteword,search,|,image,link,unlink,media,inserttime,insertdate,charmap,media,pagebreak,|,tablecontrols,|,visualaid",
-				theme_advanced_buttons3 : "",
-				theme_advanced_toolbar_location : "top",
-				theme_advanced_toolbar_align : "left",
-				theme_advanced_statusbar_location : "bottom",
-				theme_advanced_resizing : true,
-				theme_advanced_blockformats: "p,pre,h1,h2,h3,h4,h5",
-
-				content_css : "css/content.css"
+				// templates: [
+				// 	{ title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+				// 	{ title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+				// 	{ title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+				// ],
+				quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+				toolbar_drawer: 'sliding',
+				contextmenu: "link image imagetools table"
 			});
-			
+
 			// onbeforeunload() does not work correctly in certain browsers. Disable this functionality if not using Firefox/Chrome.
 			var confirmed_exit = true;
 			if(!navigator.appName.indexOf("Netscape")) 
@@ -63,27 +67,22 @@
 
 			function open_file_manager() 
 			{
-				window.open('index.php?action=file_manager','insert_file','width=640,height=490,screenX=200,left=200,screenY=200,top=200,status=yes,menubar=no');
+				window.open('index.php?action=file_manager','insert_file','width=640,height=510,screenX=200,left=200,screenY=200,top=200,status=yes,menubar=no');
 			}		
 		</script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="editor">
-				<h1 title="Powered by nc-cms"><?php echo NC_WEBSITE_NAME; ?>
-				</h1>
+				<div id="header"> <img src="system/images/nc_logo.png" /> </div>
 				<form name="editorform" id="editorform" method="post" action="index.php?action=save&amp;ref=<?php echo $_SERVER['HTTP_REFERER']; ?>">
 					<br />
 					<textarea cols="102" rows="20" name="editordata" id="editordata" class="textfield"><?php echo htmlspecialchars($data); ?></textarea>
 					<input name="name" id="name" type="hidden" value="<?php echo $name; ?>" />
-					<p class="tip"><?php echo NC_LANG_EDITOR_HTML_HELP; ?>
-					</p>
-					<br />
-					<span class="button file_man"><a href="javascript:open_file_manager()"><span class="icon icon_upload"><?php echo NC_LANG_EDITOR_INSERT_FILE; ?></span></a></span>
-					<br /><br />
-					<br /><br />
-					<span class="button"><a href="javascript:save_confirmation()"><span class="icon icon_accept"><?php echo NC_LANG_SAVE; ?></span></a></span>
-					<span class="button"><a href="javascript:cancel_confirmation()"><span class="icon icon_delete"><?php echo NC_LANG_CANCEL; ?></span></a></span>
+					<p class="tip"><?php echo NC_LANG_EDITOR_HTML_HELP; ?> <?php echo NC_UPLOAD_DIRECTORY; ?></p>
+					<span class="nc_button file_man"><a href="javascript:open_file_manager()"><span class="icon icon_upload"><?php echo NC_LANG_EDITOR_INSERT_FILE; ?></span></a></span>
+					<span class="nc_button" style="float: right"><a href="javascript:save_confirmation()"><span class="icon icon_accept"><?php echo NC_LANG_SAVE; ?></span></a></span>
+					<span class="nc_button" style="float: right"><a href="javascript:cancel_confirmation()"><span class="icon icon_delete"><?php echo NC_LANG_CANCEL; ?></span></a></span>
 				</form>
 				<div class="footer"></div>
 			</div>

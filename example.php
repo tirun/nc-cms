@@ -13,6 +13,7 @@
 		<meta name="robots" content="noindex" />
 		<meta name="robots" content="nofollow" />
 		<title><?php $cms->Title('home_title'); ?></title> <!-- #2 Allow website title editing. -->
+		<link rel="stylesheet" type="text/css" media="screen" href="example.css" />
 		<link rel="stylesheet" type="text/css" media="screen" href="<?php $cms->CSS(); ?>" /> <!-- #3 Include CSS. -->
 	</head>
 	<body>

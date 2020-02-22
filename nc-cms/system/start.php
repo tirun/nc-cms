@@ -3,7 +3,6 @@
 // Bootstrap file for nc-cms. 
 // Embed nc-cms into your website by including this file.
 define('NC_VERSION', '3.5');
-define('NC_UPLOAD_DIRECTORY', './content/upload/');
 
 // Error Reporting Level.
 // By default nc-cms runs with error reporting set to E_ALL & ~E_DEPRECATED.  
@@ -24,5 +23,7 @@ require(NC_BASEPATH.'/lib/NCCms.class.php');
 // Currently only english is available. More can be added here.
 if(NC_LANGUAGE == 'english')
 	require(NC_BASEPATH.'/language/english.php');
+else if(NC_LANGUAGE == 'german')
+	require(NC_BASEPATH.'/language/german.php');
 else
 	require(NC_BASEPATH.'/language/blank.php');

@@ -1,158 +1,135 @@
 /* reset all elements */
-body 
-{
-	font-size: 12px;
-	font-family: "Helvetica Neue", arial, helvetica, sans-serif;
-	background: #D6D5D5;
-	color: #000000;
+body {
+    font-size: 12px;
+    font-family: "Helvetica Neue", arial, helvetica, sans-serif;
+    background: #D6D5D5;
+    color: #000000;
 }
 
-/* custom elements */		
-#wrapper 
-{
+/* custom elements */
+#wrapper {
     margin: 20px auto;
     width: 760px;
 }
 
-#editor
-{
+#editor {
     margin: 0 auto;
     width: 410px;
-	background: #F8F8F8 url('../images/content_background.png') top center repeat-y;
+    background: #F8F8F8 url('../images/content_background.png') top center repeat-y;
 }
 
-#editor h1
-{
-	content: none;
-	display: block;
-	width: 410px;
-	height: 110px;
-	text-indent: -9999px;
-	overflow: hidden;
-	background: #F8F8F8 url('../images/header_background.png') top center no-repeat;
+#header {
+    background: #F8F8F8 url('../images/header_background.png') top center no-repeat;
+    height: 60px;
 }
 
-#editor form
-{
-	margin: 0 20px 20px 30px;
+#header img {
+    display: block;
+    padding-top: 8px;
 }
 
-#editor form p input
-{
-	padding: 1px;
-	width: 340px;
+#editor form {
+    margin: 0 20px 0 20px;
+    min-height: 85px;
 }
 
-#editor form p label
-{
-	font-weight: bold;
+#editor form p input {
+    padding: 1px;
+    width: 340px;
 }
 
-#editorform p label
-{
-	font-size: 12px;
-	color: #444444;
+#editor form p label {
+    font-weight: bold;
 }
 
-#editor .footer
-{
-	display: block;
-	width: 410px;
-	height: 38px;
-	background: #F8F8F8 url('../images/footer_background.png') top center no-repeat;
+#editorform p label {
+    font-size: 12px;
+    color: #444444;
 }
 
-.button
-{
-	background: url('../images/button_right.gif') no-repeat right top;
-	float: left;
-	margin: 0 10px 0 0;
+#editor .footer {
+    display: block;
+    width: 410px;
+    height: 38px;
+    background: #F8F8F8 url('../images/footer_background.png') top center no-repeat;
 }
 
-.button a, .button a:link, .button a:visited, .button a:active, .button a:hover
-{
-	padding: 0px 12px 0px 12px;
-	height: 26px;
-	background: url('../images/button_left.gif') no-repeat left top;
-	color: #707070;
-	line-height: 26px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 13px;
-	text-decoration: none;
-	display: block;
+.nc_button:hover {
+    background-color: gray;
+    color: white;
 }
 
-.button a:hover
-{
-	color: #303030;
+.nc_button {
+    background-color: white;
+    color: black;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    padding: 6px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
 }
 
-.button a .icon 
-{
-	padding: 0px 0px 0px 20px;
-	font-weight: bold;
-	height: 16px;
+.nc_button a,
+.nc_button a:link,
+.nc_button a:visited,
+.nc_button a:active {
+    color: #94CD1B;
 }
 
-.icon_go
-{
-	background: url('../images/key_go.png') no-repeat left top;
+.nc_button a .icon {
+    padding: 0px 0px 0px 20px;
+    font-weight: bold;
+    height: 16px;
 }
 
-.icon_accept
-{
-	background: url('../images/accept.png') no-repeat left top;
+.icon_go {
+    background: url('../images/key_go.png') no-repeat left top;
 }
 
-.icon_delete
-{
-	background: url('../images/delete.png') no-repeat left top;
+.icon_accept {
+    background: url('../images/accept.png') no-repeat left top;
 }
 
-.icon_insert
-{
-	background: url('../images/insert.png') no-repeat left top;
+.icon_delete {
+    background: url('../images/delete.png') no-repeat left top;
 }
 
-.icon_upload
-{
-	background: url('../images/upload.png') no-repeat left top;
+.icon_insert {
+    background: url('../images/insert.png') no-repeat left top;
 }
 
-.icon_picture
-{
-	background: url('../images/picture.png') no-repeat left top;
+.icon_upload {
+    background: url('../images/upload.png') no-repeat left top;
 }
 
-.icon_file
-{
-	background: url('../images/file.png') no-repeat left top;
+.icon_picture {
+    background: url('../images/picture.png') no-repeat left top;
 }
 
-.icon_archive
-{
-	background: url('../images/archive.png') no-repeat left top;
+.icon_file {
+    background: url('../images/file.png') no-repeat left top;
 }
 
-.icon_upload
-{
-	background: url('../images/upload.png') no-repeat left top;
+.icon_archive {
+    background: url('../images/archive.png') no-repeat left top;
 }
 
-.icon_audio
-{
-	background: url('../images/audio.png') no-repeat left top;
+.icon_upload {
+    background: url('../images/upload.png') no-repeat left top;
 }
 
-
-.clear
-{
-	clear: both;
+.icon_audio {
+    background: url('../images/audio.png') no-repeat left top;
 }
 
-.print_only
-{
-	display: none;
+.clear {
+    clear: both;
 }
 
+.print_only {
+    display: none;
+}

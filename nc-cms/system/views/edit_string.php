@@ -44,8 +44,7 @@
 	<body>
 		<div id="wrapper">
 			<div id="editor">
-				<h1 title="Powered by nc-cms"><?php echo NC_WEBSITE_NAME; ?>
-				</h1>
+				<div id="header"> <img src="system/images/nc_logo.png" /> </div>
 				<form name="editorform" id="editorform" method="post" action="index.php?action=save&amp;ref=<?php echo $_SERVER['HTTP_REFERER']; ?>">
 					<p>
 						<br />
@@ -53,8 +52,8 @@
 					</p>
 					<input name="name" id="name" type="hidden" value="<?php echo $name; ?>" />
 					<br />
-					<span class="button"><a href="javascript:save_confirmation()"><span class="icon icon_accept"><?php echo NC_LANG_SAVE; ?></span></a></span>
-					<span class="button"><a href="javascript:cancel_confirmation()"><span class="icon icon_delete"><?php echo NC_LANG_CANCEL; ?></span></a></span>
+					<span class="nc_button" style="float: right"><a href="javascript:save_confirmation()"><span class="icon icon_accept"><?php echo NC_LANG_SAVE; ?></span></a></span>
+					<span class="nc_button" style="float: right"><a href="javascript:cancel_confirmation()"><span class="icon icon_delete"><?php echo NC_LANG_CANCEL; ?></span></a></span>
 				</form>
 				<div class="footer"></div>
 			</div>

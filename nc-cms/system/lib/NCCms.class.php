@@ -161,8 +161,8 @@ class NCCms
 		{
 			$output = '
 			<div class="nc_cp">
-				<div class="nc_logo">v'.NC_VERSION.'</div>
-				<span class="nc_button nc_button_push_right"><a href="'.$this->URLPathRelative().'/index.php?action=logout"><span class="nc_icon nc_icon_logout">'.NC_LANG_LOG_OUT.'</span></a></span>';
+				<div class="nc_logo">v'.NC_VERSION.' </div>
+				<span class="nc_button"><a href="'.$this->URLPathRelative().'/index.php?action=logout"><span class="nc_icon nc_icon_logout">'.NC_LANG_LOG_OUT.'</span></a></span>';
 				if($this->page_name != '') 
 					$output .= ' <span class="nc_button nc_button_push_right"><a href="'.$this->URLPathRelative().'/index.php?action=edit_string&amp;name='.$this->page_name.'"><span class="nc_icon nc_icon_title">'.NC_LANG_EDIT_PAGE_TITLE.'</span></a></span>';
 			$output .= '
@@ -325,6 +325,23 @@ class NCCms
 		return ($current_time - $this->load_time);
 	}
 
+	/**
+	 * Check if calls to API comes from the same site.
+	 */
+	function CheckOrigin()
+	{
+		$accepted_origins = array("http://localhost", $this->SiteURL());
+		if (isset($_SERVER['HTTP_ORIGIN'])) {
+			// same-origin requests won't set an origin. If the origin is set, it must be valid.
+			if (in_array($_SERVER['HTTP_ORIGIN'], $accepted_origins)) {
+			   header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+			 } else {
+			   header("HTTP/1.1 403 Origin Denied");
+			   return;
+			}
+		}
+	}
+
 	/** 
 	* Main routine for content editors using the CMS.
 	*/
@@ -381,6 +398,7 @@ class NCCms
 		}
 		else if($action == 'save')
 		{
+			$this->CheckOrigin();
 			$this->UserCheck();
 
 			if(isset($_GET['ref'])) // Required GET data.
@@ -401,11 +419,24 @@ class NCCms
 			$status_message = '';
 			include(NC_BASEPATH.'/views/file_manager.php'); // Load file manager view.
 		}
+		// https://www.tiny.cloud/docs/advanced/php-upload-handler/
 		else if($action == 'file_manager_upload')
 		{
+			// return json string for tiny mce if called from there
+			$return = false;
+			if(isset($_GET['return'])) // Required GET data.
+				$return = true;
+
+			$this->CheckOrigin();
 			$this->UserCheck();
+
 			$status_message = '';
+
+			$filesize = $_FILES['file']['size'];
 			
+			$maxfilesize = UPLOAD_FILE_SIZE_MAX;
+
+			// Check for errors
 			if ($_FILES['file']['error'] > 0) // There was trouble uploading! 
 			{
 				if($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE)
@@ -415,19 +446,38 @@ class NCCms
 				else
 					$status_message = NC_LANG_FILE_ERROR.'<br />'. $_FILES['file']["error"] .'<br />'.NC_LANG_ERROR_PHP_MANUAL;
 			}
+			// Check specified upload size limit
+			else if ($filesize > $maxfilesize) 
+			{
+				$status_message = NC_LANG_FILE_ERROR.'<br />'. NC_LANG_FILE_SIZE . '(' .  $filesize / 1000 . ' KB) <br /> ' . NC_LANG_FILE_SIZE_MAX . $maxfilesize / 1000 . ' KB';
+			}
+			// Sanitize input
+			else if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $_FILES['file']['name']))
+			{
+				$status_message = NC_LANG_FILE_ERROR . '<br /> Invalid file name.' ;
+
+				if($return){
+					header("HTTP/1.1 400 Invalid file name.");
+					return;
+				}
+			}
+			// Verify extension
+			else if (!in_array(strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png", "jpeg")))
+			{
+				$status_message = NC_LANG_FILE_ERROR . '<br /> Invalid extension.' ;
+
+				if($return){
+					header("HTTP/1.1 400 Invalid extension.");
+					return;
+				}
+			}
 			else
 			{
 				$replacing_file = false;
 
 				if(file_exists(NC_UPLOAD_DIRECTORY.$_FILES['file']['name']))
 					$replacing_file = true;
-
-				// Disallow PHP file uploads.
-				$test = strrev(trim(strtolower($_FILES['file']['name'])));
-				if (stripos($test, "php") === 0)
-				{
-					$status_message = NC_LANG_FILE_ERROR_PHP_TYPE;
-				}
+					
 				else
 				{
 					move_uploaded_file($_FILES['file']['tmp_name'], NC_UPLOAD_DIRECTORY.$_FILES['file']['name']); // Write the file
@@ -436,6 +486,12 @@ class NCCms
 						$status_message = NC_LANG_FILE_REPLACED.'<br /><strong>'.$_FILES['file']['name'].' ('.NCUtility::ReturnStringSize($_FILES['file']['size']).')</strong>';
 					else
 						$status_message = NC_LANG_FILE_UPLOADED.'<br /><strong>'.$_FILES['file']['name'].' ('.NCUtility::ReturnStringSize($_FILES['file']['size']).')</strong>';
+					
+					// return json string for tiny mce if called from there
+					if($return){
+						echo json_encode(array('location' => NC_UPLOAD_DIRECTORY . $_FILES['file']['name']));
+						return;
+					}
 				}
 			}
 			
@@ -443,6 +499,7 @@ class NCCms
 		}
 		else if($action == 'file_manager_remove')
 		{
+			$this->CheckOrigin();
 			$this->UserCheck();
 			$status_message = '';
 			$file = '';

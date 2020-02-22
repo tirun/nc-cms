@@ -4,6 +4,8 @@ define('NC_LANG_ERROR_CONFIG', "NC_CMS_URL in config.php is not set correctly.")
 define('NC_LANG_ERROR_PHP_MANUAL', "See PHP manual for file upload error codes.");
 define('NC_LANG_FILE_INI_SIZE', "File is too large to upload.<br />Increase upload_max_filesize in your servers php.ini file.");
 define('NC_LANG_FILE_NOT_FOUND', "No file selected to upload.");
+define('NC_LANG_FILE_SIZE', "File is too large to upload.");
+define('NC_LANG_FILE_SIZE_MAX', "Files can be uploaded up to a size of ");
 define('NC_LANG_FILE_ERROR', "Error uploading file.");
 define('NC_LANG_FILE_REPLACED', "File successfully replaced!");
 define('NC_LANG_FILE_UPLOADED', "File successfully uploaded!");

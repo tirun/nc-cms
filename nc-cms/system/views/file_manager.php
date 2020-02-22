@@ -24,9 +24,10 @@
 			else
 				editor_content += '<a href="'+href+'">'+get_filename(href)+'</a>';
 			
+			// push image to tiny mce
 			opener.tinyMCE.execCommand('mceInsertContent', true, editor_content);
 		}
-		
+
 		function remove_confirmation(href) 
 		{
 			var answer = confirm("<?php echo NC_LANG_EDITOR_FILE_REMOVE; ?>");
@@ -59,11 +60,11 @@
 			{
 				$(".image_preview").show();
 				$(".image_preview img").attr({ 
-					src: "<?php echo NC_CMS_URL; ?>/content/upload/"+tmp }); 
+					src: "<?php echo NC_UPLOAD_DIRECTORY; ?>"+tmp }); 
 			}
 			
 			$(".file_insert").attr({ 
-					href: "javascript:insert_file('<?php echo NC_CMS_URL; ?>/content/upload/"+tmp+"')" });
+					href: "javascript:insert_file('<?php echo NC_UPLOAD_DIRECTORY; ?>"+tmp+"')" });
 			$(".file_remove").attr({ 
 					href: "javascript:remove_confirmation('index.php?action=file_manager_remove&file="+tmp+"')" });
 			$(".file_options").show(); 
@@ -89,14 +90,14 @@
 					<br />
 					<?php echo "Maximum: ".ini_get("upload_max_filesize"); ?>
 				</p>
-				<span class="button"><a href="javascript:document.loginform.submit()"><span class="icon icon_upload"> <?php echo NC_LANG_UPLOAD; ?></span></a></span>
+				<span class="nc_button"><a href="javascript:document.loginform.submit()"><span class="icon icon_upload"> <?php echo NC_LANG_UPLOAD; ?></span></a></span>
 			</form>
 			<br /><br />
 			<div class="file_options_info">
 				<strong><?php echo NC_LANG_EDITOR_FILE_SELECT; ?></strong>
 			</div>
 			<div class="file_options" style="display: none;">
-				<div style="height: 288px;">
+				<div class="preview" style="">
 					<p class="file_selected"></p>
 					<div class="image_preview">
 						<strong><?php echo NC_LANG_IMAGE_PREVIEW; ?></strong>
@@ -105,8 +106,8 @@
 					</div>
 					<br />
 				</div>
-				<span class="button"><a class="file_insert" href="javascript:insert_file()"><span class="icon icon_insert"> <?php echo NC_LANG_EDITOR_INSERT; ?></span></a></span>
-				<span class="button"><a class="file_remove" href="#"><span class="icon icon_delete"> <?php echo NC_LANG_REMOVE; ?></span></a></span>
+				<span class="nc_button"><a class="file_insert" href="javascript:insert_file()"><span class="icon icon_insert"> <?php echo NC_LANG_EDITOR_INSERT; ?></span></a></span>
+				<span class="nc_button"><a class="file_remove" href="#"><span class="icon icon_delete"> <?php echo NC_LANG_REMOVE; ?></span></a></span>
 			</div>
 		</div>
 		<div id="wrapper-right">

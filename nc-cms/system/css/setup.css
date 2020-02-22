@@ -106,37 +106,36 @@ a:hover, a:active
 }
 
 
-.button
-{
-	background: url('../images/button_right.gif') no-repeat right top;
-	float: left;
+.nc_button:hover {
+	background-color: grey;
+    color: white;
 }
 
-.button a, .button a:link, .button a:visited, .button a:active, .button a:hover
-{
-	
-	padding: 0px 12px 0px 12px;
-	height: 26px;
-	background: url('../images/button_left.gif') no-repeat left top;
-	color: #707070;
-	line-height: 26px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 13px;
-	text-decoration: none;
-	display: block;
+.nc_button {
+	background-color: white;
+    color: black;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    padding: 6px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
 }
 
-.button a:hover
+.nc_button a,
+.nc_button a:link,
+.nc_button a:visited,
+.nc_button a:active
 {
-	color: #303030;
+	color: #94CD1B;
 }
 
-.button a .icon 
-{
-	padding: 0px 0px 0px 20px;
-	font-weight: bold;
-	height: 16px;
+.nc_button a .icon {
+    padding: 0px 0px 0px 20px;
+    height: 16px;
 }
 
 .icon_go
@@ -154,8 +153,6 @@ a:hover, a:active
 {
 	background: url('../images/setup_database.png') no-repeat left top;
 }
-
-
 
 .clear
 {

@@ -107,7 +107,7 @@ else // DEFAULT: Retrieve login page.
 			$output .= '<h2><strong>Database Setup Complete!</strong></h2> <p>The required nc-cms tables have already been setup in your database. You may now delete this file if you wish.</p>';
 		else
 		{
-			$output .= '<p style="width: 200px; margin: 0 auto; text-align: center;"><span class="button"><a href="?action=install" ><span class="icon icon_setup_database" > Setup MySQL Database</span></a></span></p><br />';
+			$output .= '<p style="width: 200px; margin: 0 auto; text-align: center;"><span class="nc_button"><a href="?action=install" ><span class="icon icon_setup_database" > Setup MySQL Database</span></a></span></p><br />';
 			$output .= '<p>You may delete this file if you do not plan to use nc-cms\'s database support.</p>';
 		}
 	}

@@ -29,18 +29,21 @@
 	<body>
 		<div id="wrapper">
 			<div id="login">
-				<h1 title="Powered by nc-cms"><?php echo NC_WEBSITE_NAME; ?></h1>
-				<form name="loginform" id="loginform" method="post" action="<?php echo NCUtility::Referrer(); ?>">	
-					<p>
-						<label for="user" class="label"><?php echo NC_LANG_USERNAME; ?></label><br />
-						<input type="text" name="user" id="user" class="textfield" size="24" />
-					</p>
-					<p style="margin-top: 10px;">
-						<label for="pass" class="label"><?php echo NC_LANG_PASSWORD; ?></label><br />
-						<input type="password" name="pass" id="pass" class="textfield" size="24" />
-					</p>
-					<br />
-					<span class="button"><a href="javascript:document.loginform.submit()"><span class="icon icon_go"> <?php echo NC_LANG_LOGIN_RETURN; ?></span></a></span>
+				<div id="header"> <img src="system/images/nc_logo.png" /> </div>
+				<form name="loginform" id="loginform" method="post" action="<?php echo NCUtility::Referrer(); ?>">
+					<div class="loginform">
+						<p>
+							<label for="user" class="label"><?php echo NC_LANG_USERNAME; ?></label><br />
+							<input type="text" name="user" id="user" class="textfield" size="24" />
+						</p>
+						<p style="margin-top: 10px;">
+							<label for="pass" class="label"><?php echo NC_LANG_PASSWORD; ?></label><br />
+							<input type="password" name="pass" id="pass" class="textfield" size="24" />
+						</p>
+					</div>
+					<div class="nc_centered">
+						<span class="nc_button"><a href="javascript:document.loginform.submit()"><span class="icon icon_go"> <?php echo NC_LANG_LOGIN_RETURN; ?></span></a></span>
+					</div>
 				</form>
 				<div class="footer"></div>
 			</div>
