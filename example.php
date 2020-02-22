@@ -10,6 +10,8 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="robots" content="noindex" />
+		<meta name="robots" content="nofollow" />
 		<title><?php $cms->Title('home_title'); ?></title> <!-- #2 Allow website title editing. -->
 		<link rel="stylesheet" type="text/css" media="screen" href="<?php $cms->CSS(); ?>" /> <!-- #3 Include CSS. -->
 	</head>
